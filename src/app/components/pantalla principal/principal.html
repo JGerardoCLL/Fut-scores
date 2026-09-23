@@ -1,4 +1,15 @@
 <main class="principal">
-    <h1 class="titulo">Hola</h1>
+    <h1 class="titulo">Equipos</h1>
+    <p>Equipos recibidos: {{ teams().length }}</p>
+
+    <ul>
+        @for (team of teams(); track team.id) {
+        <li>
+            {{ team.name }}
+        </li>
+        } @empty {
+        <li>No hay equipos para mostrar.</li>
+        }
+    </ul>
     
 </main>
