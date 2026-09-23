@@ -1,6 +1,7 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import { FutbolService  } from '../../services/futbol.service';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FutbolService } from '../../services/futbol.service';
+import { Team } from '../../models/futbol.model';
 
 @Component({
     selector: 'app-principal',
@@ -14,12 +15,11 @@ export class PrincipalComponent implements OnInit{
 
     private readonly futbolService = inject(FutbolService);
 
-    teams = signal<any[]>([]);
+    teams = signal<Team[]>([]);
 
     ngOnInit(): void {
         this.futbolService.getTeams().subscribe({
             next: (response) => {
-                console.log('Primer equipo:',response.data[0]);
                 this.teams.set(response.data);
             },
             error: (error) => {
