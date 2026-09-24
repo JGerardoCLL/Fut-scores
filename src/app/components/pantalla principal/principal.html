@@ -2,7 +2,16 @@
     <h1 class="titulo">Equipos</h1>
     <p>Equipos recibidos: {{ teams().length }}</p>
 
+    @if (isLoading()) {
+        <p>Cargando equipos...</p>
+    }
+
+        @if (errorMessage()) {
+        <p>{{ errorMessage() }}</p>
+        }
+
     <ul>
+
         @for (team of teams(); track team.id) {
         <li>
             {{ team.name }}
@@ -11,7 +20,9 @@
             />
         </li>
         } @empty {
+            @if (!isLoading() && !errorMessage()) {
         <li>No hay equipos para mostrar.</li>
+        }
         }
     </ul>
     

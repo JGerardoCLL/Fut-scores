@@ -16,14 +16,20 @@ export class PrincipalComponent implements OnInit{
     private readonly futbolService = inject(FutbolService);
 
     teams = signal<Team[]>([]);
+    isLoading = signal<boolean>(false);
+    errorMessage = signal<string | null>(null);
 
     ngOnInit(): void {
+        this.isLoading.set(true);
+        
         this.futbolService.getTeams().subscribe({
             next: (response) => {
                 this.teams.set(response.data);
+                this.isLoading.set(false);
             },
             error: (error) => {
-                console.error('Error al obtener los equipos:', error);
+                this.errorMessage.set('No se pudieron cargar los equipos.');
+                this.isLoading.set(false);
             }
         });
     }
