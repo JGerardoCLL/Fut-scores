@@ -6,6 +6,9 @@
         @for (team of teams(); track team.id) {
         <li>
             {{ team.name }}
+            <img
+            [src]="team.image_path"
+            />
         </li>
         } @empty {
         <li>No hay equipos para mostrar.</li>

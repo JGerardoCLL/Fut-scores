@@ -4,6 +4,7 @@ export interface Team {
     country_id: number;
     founded: number | null;
     gender: string;
+    image_path: string;
 }
 
 export interface SportmonksResponse<Contenido>{
