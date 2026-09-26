@@ -16,7 +16,8 @@ export class FutbolService{
 
         return this.http.get<SportmonksResponse<Team>>(this.apiUrl, {
             params: {
-                api_token: 'pdUyAj1tVHoiYHfsrlCxra6lWAHx8HlDqA1uiFqaqGtBiTbGIhu2MT2FWZUc'
+                api_token: 'pdUyAj1tVHoiYHfsrlCxra6lWAHx8HlDqA1uiFqaqGtBiTbGIhu2MT2FWZUc',
+                include: 'upcoming.participants;upcoming.league'
             }
         });
     }
