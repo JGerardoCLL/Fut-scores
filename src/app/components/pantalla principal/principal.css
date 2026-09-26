@@ -1,0 +1,98 @@
+/* Configuración general de la página */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f4f4f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Contenedor principal de la tarjeta */
+.card {
+  background-color: #f8f8f8;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 420px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+/* Imagen del logo */
+.card-logo {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+/* Columna de contenidos */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #666666;
+  font-size: 13px;
+}
+
+/* Nombre del club */
+.team-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 2px 0;
+}
+
+/* Fila de insignias (badges) y texto */
+.meta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Estilos de las insignias */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.badge-green {
+  background-color: #237834;
+}
+
+.badge-blue {
+  background-color: #1a73e8;
+}
+
+/* Textos secundarios */
+.meta-text {
+  color: #707070;
+  font-size: 13px;
+}
+
+/* Fila con icono de trofeo */
+.details-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  color: #666666;
+}
+
+.trophy-icon {
+  font-size: 14px;
+  margin-right: 2px;
+}

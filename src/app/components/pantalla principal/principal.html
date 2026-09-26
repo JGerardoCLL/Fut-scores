@@ -1,6 +1,5 @@
 <main class="principal">
-    <h1 class="titulo">Equipos</h1>
-    <p>Equipos recibidos: {{ teams().length }}</p>
+      <p>Equipos recibidos: {{ teams().length }}</p>
 
     @if (isLoading()) {
         <p>Cargando equipos...</p>
@@ -13,12 +12,34 @@
     <ul>
 
         @for (team of teams(); track team.id) {
-        <li>
-            {{ team.name }}
-            <img
-            [src]="team.image_path"
-            />
-        </li>
+        <article class="card">
+        <img class="card-logo" [src]="team.image_path" [alt]="'Escudo de ' + team.name">
+
+        <div class="card-content">
+            <h2 class="team-name">{{ team.name }}</h2>
+
+            <div class="meta-row">
+            <span class="badge badge-green">{{ team.type | titlecase }}</span>
+            <span class="badge badge-blue">{{ team.short_code }}</span>
+
+            @if (team.founded) {
+                <span class="meta-text">Founded {{ team.founded }}</span>
+            }
+
+            @if (team.last_played_at) {
+                <span class="meta-text">
+                Last played: {{ team.last_played_at | date:'dd MMM yyyy' }}
+                </span>
+            }
+            </div>
+
+            <div class="details-row">
+            <span>🏆</span>
+            <span>Sport ID: {{ team.sport_id }}</span>
+            <span>Country ID: {{ team.country_id }}</span>
+            </div>
+        </div>
+        </article>
         } @empty {
             @if (!isLoading() && !errorMessage()) {
         <li>No hay equipos para mostrar.</li>
@@ -26,4 +47,3 @@
         }
     </ul>
     
-</main>
