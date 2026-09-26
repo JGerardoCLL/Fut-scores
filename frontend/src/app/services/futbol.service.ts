@@ -10,15 +10,13 @@ import { Team, SportmonksResponse } from "../models/futbol.model";
 
 export class FutbolService{
     private readonly http = inject(HttpClient);
-    private readonly apiUrl = '/api/v3/football/teams';
+    //llamada al back
+    private readonly apiUrl = 'http://localhost:3000/api/teams';
 
     getTeams(): Observable<SportmonksResponse<Team>>{
 
         return this.http.get<SportmonksResponse<Team>>(this.apiUrl, {
-            params: {
-                api_token: 'pdUyAj1tVHoiYHfsrlCxra6lWAHx8HlDqA1uiFqaqGtBiTbGIhu2MT2FWZUc',
-                include: 'upcoming.participants;upcoming.league'
-            }
+            
         });
     }
 }
