@@ -28,7 +28,7 @@ export interface Match {
   starting_at_timestamp: number;
   leg: string;
   length: number;
-  meta: MatchMeta;
+  meta: MatchMeta[];
   participants: Participant[];
   league: League;
 }
@@ -42,7 +42,7 @@ export interface Participant {
   name: string;
   short_code: string;
   image_path: string;
-  meta: ParticipantMeta;
+  meta: ParticipantMeta[];
 }
 
 export interface ParticipantMeta {
