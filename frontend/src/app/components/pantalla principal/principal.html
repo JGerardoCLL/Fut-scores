@@ -15,31 +15,55 @@
         <article class="card">
         <img class="card-logo" [src]="team.image_path" [alt]="'Escudo de ' + team.name">
 
-        <div class="card-content">
-            <h2 class="team-name">{{ team.name }}</h2>
+            <div class="card-content">
+                <h2 class="team-name">{{ team.name }}</h2>
 
-            <div class="meta-row">
-            <span class="badge badge-green">{{ team.type | titlecase }}</span>
-            <span class="badge badge-blue">{{ team.short_code }}</span>
+                <div class="meta-row">
+                <span class="badge badge-green">{{ team.type | titlecase }}</span>
+                <span class="badge badge-blue">{{ team.short_code }}</span>
 
-            @if (team.founded) {
-                <span class="meta-text">Founded {{ team.founded }}</span>
-            }
+                @if (team.founded) {
+                    <span class="meta-text">Founded {{ team.founded }}</span>
+                }
 
-            @if (team.last_played_at) {
-                <span class="meta-text">
-                Last played: {{ team.last_played_at | date:'dd MMM yyyy' }}
-                </span>
-            }
+                @if (team.last_played_at) {
+                    <span class="meta-text">
+                    Last played: {{ team.last_played_at | date:'dd MMM yyyy' }}
+                    </span>
+                }
+                </div>
+
+                <div class="details-row">
+                <span>🏆</span>
+                <span>Sport ID: {{ team.sport_id }}</span>
+                <span>Country ID: {{ team.country_id }}</span>
+                </div>
             </div>
-
-            <div class="details-row">
-            <span>🏆</span>
-            <span>Sport ID: {{ team.sport_id }}</span>
-            <span>Country ID: {{ team.country_id }}</span>
-            </div>
-        </div>
         </article>
+
+            @if (team.upcoming.length > 0) {
+                <section class="match-list">
+                    <h3>Próximos partidos</h3>
+
+                    @for (match of team.upcoming; track match.id) {
+                        <article class="match">
+                            <p>{{ match.starting_at | date:'dd MMM yyyy, HH:mm' }}</p>
+
+                            <p>{{ match.name }}</p>
+
+                            
+
+                            <div class="participants">
+                            @for (participant of match.participants; track participant.id) {
+                                <img [src]="participant.image_path"/>
+                            }
+                            </div>
+                        </article>
+                    }
+                </section>
+            } @else {
+            <p>No hay próximos partidos disponibles.</p>
+            }
         } @empty {
             @if (!isLoading() && !errorMessage()) {
         <li>No hay equipos para mostrar.</li>
