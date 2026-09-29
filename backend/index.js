@@ -15,15 +15,22 @@ if (!token) {
   throw new Error('Falta configurar SPORTMONKS_TOKEN en backend/.env');
 }
 
-app.get('/api/teams', async (_request, response) => {
+app.get('/api/teams/:id', async (request, response) => {
+
+  const teamId = Number(request.params.id);
+  if (!Number.isInteger(teamId) || teamId <= 0) {
+    return response.status(400).json({ error: 'El ID del equipo no es válido.' });
+  }
+
   const params = new URLSearchParams({
     api_token: token,
     include: 'upcoming.participants;upcoming.league'
   });
 
+  //llamada a sportmonks con la ruta incluyendo id y token
   try {
     const sportmonksResponse = await fetch(
-      `https://api.sportmonks.com/v3/football/teams?${params}`
+      `https://api.sportmonks.com/v3/football/teams/${teamId}?${params}`
     );
 
     if (!sportmonksResponse.ok) {
@@ -32,8 +39,10 @@ app.get('/api/teams', async (_request, response) => {
       });
     }
 
+    //respuesta
     const data = await sportmonksResponse.json();
     return response.json(data);
+
   } catch {
     return response.status(502).json({
       error: 'No fue posible conectarse con Sportmonks.'
