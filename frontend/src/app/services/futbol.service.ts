@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable,inject } from "@angular/core";
 import { Observable } from "rxjs";
-import { Team, SportmonksResponse } from "../models/futbol.model";
+import { Team } from "../models/futbol.model";
 
 
 @Injectable({
@@ -13,9 +13,9 @@ export class FutbolService{
     //llamada al back
     private readonly apiUrl = 'http://localhost:3000/api/teams';
 
-    getTeams(): Observable<SportmonksResponse<Team>>{
+    getTeam(teamId: number): Observable<{ data: Team }>{
 
-        return this.http.get<SportmonksResponse<Team>>(this.apiUrl, {
+        return this.http.get<{ data: Team }>(`${this.apiUrl}/${teamId}`, {
             
         });
     }
