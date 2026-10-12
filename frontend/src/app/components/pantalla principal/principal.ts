@@ -1,5 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { FutbolService } from '../../services/futbol.service';
 import { Team } from '../../models/futbol.model';
 import { finalize } from 'rxjs';
@@ -7,7 +8,7 @@ import { finalize } from 'rxjs';
 @Component({
     selector: 'app-principal',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, RouterLink],
     templateUrl: './principal.html',
     styleUrl: './principal.css'
 })
