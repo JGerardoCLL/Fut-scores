@@ -1,1 +1,76 @@
-<h1>HOLA</h1>
+<main class="schedule-page">
+	<header class="schedule-header">
+		<a class="back-link" routerLink="/">Volver a equipos</a>
+		<div class="date-control">
+			<label for="schedule-date">Calendario del día</label>
+			<div class="date-input-row">
+				<input id="schedule-date" type="date" [value]="selectedDate()" (change)="onDateChange($event)">
+				<button type="button" (click)="loadSchedule()" [disabled]="isLoading()">
+					{{ isLoading() ? 'Cargando...' : 'Consultar' }}
+				</button>
+			</div>
+		</div>
+	</header>
+
+	@if (isLoading()) {
+		<p class="status-message">Cargando ligas y partidos...</p>
+	}
+
+	@if (errorMessage()) {
+		<p class="status-message error-message">{{ errorMessage() }}</p>
+	}
+
+	@if (!isLoading() && !errorMessage() && leagues().length === 0) {
+		<p class="status-message">No hay partidos de las ligas disponibles para esta fecha.</p>
+	}
+
+	@for (league of leagues(); track league.id) {
+		<section class="league-section">
+			<header class="league-heading">
+				@if (league.image_path) {
+					<img [src]="league.image_path" [alt]="'Logo de ' + league.name">
+				}
+				<h2>{{ league.name }}</h2>
+				<span>{{ league.today?.length ?? 0 }} partidos</span>
+			</header>
+
+			@if (league.today?.length) {
+				<div class="match-list">
+					@for (match of league.today; track match.id) {
+						<article class="match-row">
+							<time [attr.datetime]="match.starting_at">
+								{{ match.starting_at | date:'HH:mm' }}
+							</time>
+							<div class="teams">
+								@for (participant of match.participants ?? []; track participant.id) {
+									<span class="team">
+										@if (participant.image_path) {
+											<img [src]="participant.image_path" [alt]="''">
+										}
+										{{ participant.name }}
+									</span>
+								}
+							</div>
+							<strong class="score">
+								@if (match.scores?.length) {
+									@for (score of match.scores; track $index) {
+										@if (score.score?.goals !== null && score.score?.goals !== undefined) {
+											<span>{{ score.score.goals }}</span>
+										}
+									}
+								} @else {
+									<span>vs</span>
+								}
+							</strong>
+							<span class="match-detail">
+								{{ match.round?.name ?? match.stage?.name ?? match.group?.name ?? match.name }}
+							</span>
+						</article>
+					}
+				</div>
+			} @else {
+				<p class="empty-league">No hay partidos para esta liga en la fecha seleccionada.</p>
+			}
+		</section>
+	}
+</main>
