@@ -49,6 +49,39 @@ app.get('/api/teams/:id', async (request, response) => {
     });
   }
 });
+//Consulta de ligas por fecha a API
+
+app.get('/api/leagues/date/:date', async (request, response) => {
+  const date = request.params.date;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || Number.isNaN(Date.parse(`${date}T00:00:00Z`))) {
+    return response.status(400).json({ error: 'La fecha debe tener el formato YYYY-MM-DD.' });
+  }
+
+  const params = new URLSearchParams({
+    api_token: token,
+    include: 'today.scores;today.group;today.participants;today.round;today.stage'
+  });
+
+  try {
+    const sportmonksResponse = await fetch(
+      `https://api.sportmonks.com/v3/football/leagues/date/${date}?${params}`
+    );
+
+    if (!sportmonksResponse.ok) {
+      return response.status(sportmonksResponse.status).json({
+        error: 'Sportmonks no pudo completar la petición.'
+      });
+    }
+
+    const data = await sportmonksResponse.json();
+    return response.json(data);
+
+  } catch {
+    return response.status(502).json({
+      error: 'No fue posible conectarse con Sportmonks.'
+    });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Backend escuchando en http://localhost:${port}`);
