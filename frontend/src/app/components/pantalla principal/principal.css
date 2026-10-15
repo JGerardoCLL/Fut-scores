@@ -220,6 +220,13 @@
   border: 1px solid #e5e7eb;
 }
 
+/* Estilos para el botón de volver */
+.Back_general {
+  display: flex;
+  justify-content: flex-start;
+  padding: 1rem;
+}
+
 /* Responsive para pantallas pequeñas */
 @media (max-width: 640px) {
   .match-header {
