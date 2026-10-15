@@ -61,3 +61,29 @@ export interface League {
 export interface SportmonksResponse<Contenido>{
     data: Contenido[];
 }
+
+//modelos para el calendario de partidos
+
+export interface LeagueSchedule {
+  id: number;
+  name: string;
+  image_path?: string | null;
+  today?: ScheduleMatch[] | null;
+}
+
+export interface ScheduleMatch {
+  id: number;
+  name: string;
+  starting_at: string;
+  participants?: Participant[];
+  scores?: ScheduleScore[];
+  group?: { name: string } | null;
+  round?: { name: string } | null;
+  stage?: { name: string } | null;
+}
+
+export interface ScheduleScore {
+  description?: string;
+  participant?: 'home' | 'away' | string;
+  score?: { goals: number | null };
+}
