@@ -33,15 +33,13 @@
                 <span class="badge badge-green">{{ team.type | titlecase }}</span>
                 <span class="badge badge-blue">{{ team.short_code }}</span>
 
-                @if (team.founded) {
-                    <span class="meta-text">Founded {{ team.founded }}</span>
-                }
+                <span class="meta-text">Founded {{ team.founded }}</span>
+                
 
-                @if (team.last_played_at) {
-                    <span class="meta-text">
-                    Last played: {{ team.last_played_at | date:'dd MMM yyyy' }}
-                    </span>
-                }
+                <span class="meta-text">
+                 Last played: {{ team.last_played_at | date:'dd MMM yyyy' }}
+                </span>
+                
                 </div>
 
                 <!-- Segunda fila -->
@@ -97,16 +95,18 @@
                                 <p>{{ match.name }}</p>
                             </div>
                             
-                            @if (match.meta?.location) {
-                                <div class="match-location">
-                                    <p>{{ match.meta.location === 'home' ? 'Local' : 'Visitante' }}</p>
-                                </div>
-                            }
-                            
+                            <div class="match-location">
+                                <p>{{ match.meta.location === 'home' ? 'Local' : 'Visitante' }}</p>
+                            </div>
+
                             <div class="participants">
-                            @for (participant of match.participants; track participant.id) {
-                                <img [src]="participant.image_path"/>
+                            @if (match.participants[0]?.image_path) {
+                                <img [src]="match.participants[1].image_path"/>
+                                <img [src]="match.participants[0].image_path"/>
                             }
+                            <!--@for (participant of match.participants; track participant.id) {
+                                <img [src]="participant.image_path"/>
+                            }-->
                             </div>
 
                         </article>
