@@ -31,7 +31,6 @@
 					<img [src]="league.image_path" [alt]="'Logo de ' + league.name">
 				}
 				<h2>{{ league.name }}</h2>
-				<span>{{ league.today?.length ?? 0 }} partidos</span>
 			</header>
 
 			@if (league.today?.length) {
@@ -41,6 +40,7 @@
 							<time [attr.datetime]="match.starting_at">
 								{{ match.starting_at | date:'HH:mm' }}
 							</time>
+
 							<div class="teams">
 								@for (participant of match.participants ?? []; track participant.id) {
 									<span class="team">
@@ -62,9 +62,7 @@
 									<span>vs</span>
 								}
 							</strong>
-							<span class="match-detail">
-								{{ match.round?.name ?? match.stage?.name ?? match.group?.name ?? match.name }}
-							</span>
+							
 						</article>
 					}
 				</div>
