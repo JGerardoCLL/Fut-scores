@@ -82,7 +82,9 @@
             @if (team.upcoming.length > 0) {
                 <!-- Lista de partidos -->
                 <section class="match-list">
-                    <h3>Próximos partidos</h3>
+                    <div class="Titulo_partidos">
+                        <h3>Próximos partidos</h3>
+                    </div>
 
                     @for (match of team.upcoming; track match.id) {
                         <article class="match">

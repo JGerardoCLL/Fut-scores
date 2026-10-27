@@ -231,6 +231,16 @@
   border-bottom: 1px solid #002b80;
 }
 
+.Titulo_partidos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #f8f8f8;
+  border: 1px solid #e5e5e5;
+
+}
+
 .button_Back {
   display: flex;
   align-items: center;
